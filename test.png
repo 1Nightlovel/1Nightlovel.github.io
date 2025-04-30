@@ -1,0 +1,5 @@
+<html>
+  <body onload="alert(document.domain)">
+    <img src=x onerror=alert(1)>
+  </body>
+</html>
